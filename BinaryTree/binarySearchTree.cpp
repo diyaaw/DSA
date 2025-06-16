@@ -1,5 +1,6 @@
 #include<iostream>
 #include<vector>
+#include<queue>
 using namespace std;
 class Node{
     public:
@@ -14,6 +15,7 @@ class Node{
 
 static int idx=-1;
 Node* buildTree(vector<int> preorder){
+    idx++;
     if(preorder[idx]==-1){
         return nullptr;
     }
@@ -57,7 +59,25 @@ Node* buildTree(vector<int> preorder){
 //     }
 
 //  }
+//preorder traversal- time complexity is bigo of n
 
+//void preOrder(Node* root){
+//     if(!root) return ;
+
+// cout<<root->data<<" ";
+// preOrder(root->left);
+// preOrder(root->right);
+// }
+
+
+//postorder traversal
+// void postorder(Node* root){
+//     if(!root) return;
+
+// postorder(root->left);
+//     postorder(root->right);
+//     cout<<root->data<<" ";
+// }
 //  //inorder traversal
 
 //  void inorder(Node* root){
@@ -70,11 +90,34 @@ Node* buildTree(vector<int> preorder){
 //     cout<<root->data<<" ";
 //     inorder(root->right);
 //  }
+
+
+
+//level order traversal
+void levelorder(Node* root){
+    queue<Node*> q;
+    q.push(root);
+
+    while(q.size()>0){
+        Node* curr=q.front();
+        q.pop();
+
+        cout<<curr->data<<" ";
+        if(curr->left!=nullptr){
+            q.push(curr->left);
+        }
+        if(curr->right!=nullptr){
+            q.push(curr->right);
+        }
+    }
+}
+
 int main(){
 
     vector<int> preorder={1,2,-1,-1,3,4,-1,-1,5,-1,-1};
     Node* root=buildTree(preorder);
-    cout<<root->data<<" ";
+   levelorder(root);
+    
 //     int arr[]={6,3,17,5,11,18,2,1,20,14};
 //     Node* root=nullptr;
 
